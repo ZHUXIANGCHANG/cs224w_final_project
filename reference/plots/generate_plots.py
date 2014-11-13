@@ -32,10 +32,19 @@ def writeCountyTabFiles(prefix, inName):
     outName = getTabFilename(prefix, county)
     outFile = open(outName, 'w')
     for dataPoint in countyData[countyIndex]:
+      if isAnomaly(prefix, county, dataPoint): continue
+      # There is this a weird spike in the data
+      
       outFile.write('%s\t%s\n' % dataPoint)
     outFile.close()
 
   return counties
+
+# Dealing with some ad hoc anomalies in the data
+def isAnomaly(prefix, county, dataPoint):
+  if prefix == 'lib' and county == 'Maryland' and int(dataPoint[1]) > 1000: return True
+  if prefix == 'lib' and county == 'Montserrado' and dataPoint[0] == '2014-10-30': return True
+  return False
 
 def getTitle(prefix):
   countryName = 'Sierra Leone'
@@ -63,6 +72,7 @@ def writePltFile(prefix, counties):
   writeBoilerplate(prefix, outFile)
   plotParams = [getPlotString(prefix, c) for c in counties]
   outFile.write('plot %s\n' % ','.join(plotParams))
+  outFile.close()
 
 def generateFiles(csvFiles, csvSuffix='_parsed.csv'):
   for c in csvFiles:
