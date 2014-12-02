@@ -2,7 +2,8 @@ import argparse
 import json
 import os
 import sys
-from MacroGraph import MacroGraph
+sys.path.insert(0, '../macro_graph')
+from macro_graph import MacroGraph
 
 def parseArgs():
   parser = argparse.ArgumentParser(description='Run Ebola infection simulations.')
