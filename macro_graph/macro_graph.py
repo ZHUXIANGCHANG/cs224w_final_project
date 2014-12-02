@@ -1,10 +1,13 @@
 import csv
 import json
+import os
 import snap
 
 SIERRA_LEONE_PREFIX = 'sl'
 LIBERIA_PREFIX = 'lib'
 GUINEA_PREFIX = 'guin'
+
+COUNTRY_NAME_TO_PREFIX = {'sierra leone':SIERRA_LEONE_PREFIX, 'liberia':LIBERIA_PREFIX, 'guinea':GUINEA_PREFIX}
 
 """
 Class definition for the macro graph.
@@ -12,6 +15,15 @@ Class definition for the macro graph.
 class MacroGraph:
   def __init__(self, simulationInfo):
     self.simulationInfo = simulationInfo
+    self.title = simulationInfo['Title']
+    self.countryPrefix = COUNTRY_NAME_TO_PREFIX[simulationInfo["Country"].strip().lower()]
+    # Populate the macro graph structure
+    cwd = os.getcwd()
+    os.chdir('../macro_graph')
+    self.G, self.labels = MacroGraph.loadGraphAndLabels(self.countryPrefix)
+    os.chdir(cwd)
+    # TODO: Generate the county graphs
+    
     # TODO: Instantiate the graph
 
   def __str__(self):
