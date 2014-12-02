@@ -1,0 +1,21 @@
+{"Simulations" :
+  [
+    {
+      "Title" : "Example simulation info - schema not fixed yet",
+      "Country" : "Sierra Leone",
+      "Counties" : {
+        "FirstCounty" : "Random Graph Flag",
+        "SecondCounty" : "Small World Flag",
+        "OtherCounty" : "Other graph type flag"
+      }
+    },
+    {
+      "Title" : "Second simulation",
+      "Country" : "Guinea",
+      "Counties" : {
+        "A" : "blah",
+        "B" : "another"
+      }
+    }
+  ]
+}
