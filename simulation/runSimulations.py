@@ -1,8 +1,8 @@
 import argparse
 import json
 import os
-import random
 import sys
+from MacroGraph import MacroGraph
 
 def parseArgs():
   parser = argparse.ArgumentParser(description='Run Ebola infection simulations.')
@@ -22,13 +22,11 @@ def parseSimulationFile(simulationFile):
     simulations = json.loads(f.read())["Simulations"]
     return simulations
 
-def printSimulationInfo(simulation):
-  print json.dumps(simulation, indent=4, separators=(',',' : '))
-
 def main():
   simulations = parseSimulationFile(parseArgs())
   for simulation in simulations:
-    printSimulationInfo(simulation)
+    G = MacroGraph(simulation)
+    print G
 
 if __name__ == '__main__':
   main()
