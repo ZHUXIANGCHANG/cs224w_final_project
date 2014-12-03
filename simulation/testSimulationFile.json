@@ -6,7 +6,7 @@
       "Counties" : {
         "FirstCounty" : "Random Graph Flag",
         "SecondCounty" : "Small World Flag",
-        "OtherCounty" : "Other graph type flag"
+        "Kenema" : "MicroGraph"
       }
     },
     {

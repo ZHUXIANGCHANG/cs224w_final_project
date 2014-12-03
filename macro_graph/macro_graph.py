@@ -2,12 +2,17 @@ import csv
 import json
 import os
 import snap
+import sys
+sys.path.insert(0, '../micro_graph')
+from micro_graph import MicroGraph
 
 SIERRA_LEONE_PREFIX = 'sl'
 LIBERIA_PREFIX = 'lib'
 GUINEA_PREFIX = 'guin'
 
 COUNTRY_NAME_TO_PREFIX = {'sierra leone':SIERRA_LEONE_PREFIX, 'liberia':LIBERIA_PREFIX, 'guinea':GUINEA_PREFIX}
+# Maps a string identifier to the corresponding graph class
+GRAPH_TYPE_TO_CLASS = {'micrograph':'MicroGraph'}
 
 """
 Class definition for the macro graph.
@@ -23,8 +28,12 @@ class MacroGraph:
     self.G, self.labels = MacroGraph.loadGraphAndLabels(self.countryPrefix)
     os.chdir(cwd)
     # TODO: Generate the county graphs
-    
-    # TODO: Instantiate the graph
+    countyGraphTypes = simulationInfo['Counties']
+    self.countyGraphs = {}
+    for nID, county in self.labels.iteritems():
+      graphType = countyGraphTypes[county].strip().lower()
+      countyG = globals()[GRAPH_TYPE_TO_CLASS[graphType]]()
+      self.countyGraphs[nID] = countyG
 
   def __str__(self):
     return json.dumps(self.simulationInfo, indent=4, separators=(',',' : '))
