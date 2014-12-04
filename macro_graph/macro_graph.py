@@ -1,4 +1,5 @@
 import csv
+from datetime import date
 import json
 import os
 import snap
@@ -21,6 +22,7 @@ SIERRA_LEONE_PREFIX = 'sl'
 LIBERIA_PREFIX = 'lib'
 GUINEA_PREFIX = 'guin'
 COUNTRY_NAME_TO_PREFIX = {'sierra leone':SIERRA_LEONE_PREFIX, 'liberia':LIBERIA_PREFIX, 'guinea':GUINEA_PREFIX}
+PREFIX_TO_SIMULATION_INTERVAL = {SIERRA_LEONE_PREFIX:(date(2014,8,12), date(2014,11,6)), LIBERIA_PREFIX:(date(2014,6,16), date(2014,11,2)), GUINEA_PREFIX:(date(2014,8,4), date(2014, 10, 01))}
 
 """
 Class definition for the macro graph.
@@ -30,6 +32,9 @@ class MacroGraph:
     self.simulationInfo = simulationInfo
     self.title = simulationInfo['Title']
     self.countryPrefix = COUNTRY_NAME_TO_PREFIX[simulationInfo["Country"].strip().lower()]
+    self.startDate, self.endDate = PREFIX_TO_SIMULATION_INTERVAL[self.countryPrefix]
+    self.duration = (self.endDate-self.startDate).days
+
     # Populate the macro graph structure
     cwd = os.getcwd()
     os.chdir('../macro_graph')
