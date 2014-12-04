@@ -20,20 +20,24 @@ class MicroGraph:
     self.numNodes = numNodes
 
     # initialize snap.py graph: self.G
-    nodeDeg = int( math.sqrt(numNodes) )
+    nodeDeg = int( math.log(numNodes) )
     if graphType == 'random':
       numEdges = numNodes * nodeDeg / 2
       self.G = snap.GenRndGnm(snap.PUNGraph, numNodes, numEdges)
       #self.G = snap.GenRndDegK(numNodes, nodeDeg)
     elif graphType == 'small world':
       rewireProb = 0.01 # probability that an edge will be rewired in Watts-Strogatz model
-      self.G = snap.GenSmallWorld(numNodes, nodeDeg/2, rewireProb)
+      self.G = snap.GenSmallWorld(numNodes, nodeDeg/2, rewireProb) # divide degree by 2 b/c graph is undirected
+    elif graphType == 'complete':
+      self.G = snap.GenFull(snap.PUNGraph, numNodes)
+    elif graphType == 'scale free':
+      self.G = snap.GenPrefAttach(numNodes, nodeDeg)
     else:
-      raise NotImplementedError("graphType argument must be either 'random' or 'small world'.")
+      raise NotImplementedError("graphType argument must be in {'random', 'small world', 'complete', 'scale free}")
 
     # initialize variables for SIR model
     # inital beta, delta values from https://grantbrown.github.io/Ebola-2014-Analysis-Archive/Oct_02_2014/Ebola2014/Ebola2014.html
-    self.beta = 0.259
+    self.beta = 0.259 / 2
     self.delta = 0.08
     self.state = dict.fromkeys(xrange(numNodes), SUSCEPTIBLE) # dict: int nodeID => string SUSCEPTIBLE or INFECTED or RECOVERED
     self.countyHasBeenInfected = False
@@ -46,7 +50,8 @@ class MicroGraph:
     self.countyHasBeenInfected = True
 
     infectedNodeID = random.randrange(self.numNodes)
-    self.state[infectedNodeID] = INFECTED
+    if self.state[infectedNodeID] == SUSCEPTIBLE:
+      self.state[infectedNodeID] = INFECTED
 
   '''
   Returns the number of currently infected nodes in this county.
@@ -65,8 +70,10 @@ class MicroGraph:
       # minor optimization: do not need to run any SIR simulation (since we know everyone will remain SUSCEPTIBLE)
       return
 
-    for NI in self.G.Nodes():
-      currID = NI.GetId()
+    # TODO: randomly shuffle the order which we go through the nodes
+    randomOrdering = random.shuffle( range(self.numNodes) )
+    for currID in randomOrdering:
+      NI = self.G.GetNI(currID)
 
       if self.state[currID] == SUSCEPTIBLE:
         # each of its infected neighbors can infect it with probability beta
