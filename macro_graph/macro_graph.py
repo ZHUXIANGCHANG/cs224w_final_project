@@ -38,6 +38,7 @@ class MacroGraph:
     the probability of nodes spreading across counties.
     """
     self.q = 0.1
+    self.scalingFactor = 10
 
     # Populate the macro graph structure
     cwd = os.getcwd()
@@ -51,7 +52,7 @@ class MacroGraph:
     for nID, county in self.labels.iteritems():
       countyInfo = countyGraphTypes[county] # dict, e.g. {"population": 358190, "graphType": "Small World"}
       graphType = countyInfo['graphType'].strip().lower()
-      numNodes = countyInfo['population'] // 1000 # TODO: see how algorithm scales to larger graph sizes
+      numNodes = countyInfo['population'] // self.scalingFactor # TODO: see how algorithm scales to larger graph sizes
       countyG = MicroGraph(graphType, numNodes)
       self.totalNumNodes += numNodes
       self.countyGraphs[nID] = countyG
@@ -67,7 +68,10 @@ class MacroGraph:
     startCountyID, startCountyG = random.sample(self.countyGraphs.items(), 1)[0]
     startCountyG.infect()
 
+    print "This simulation will run for %d days" % self.duration
+    print "Day Counter: ",
     for day in xrange(self.duration):
+      print "%d" % (day+1),
       # Get number infected from each county
       infectedCounts = self.getInfectedCounts()
       # Flush infected counts data for this day to the .tab files for each county
@@ -123,7 +127,7 @@ class MacroGraph:
     todayDate = self.startDate + timedelta(days=day)
     todayDateString = todayDate.strftime('%Y-%m-%d')
     for countyID, outputFile in countyIDToOutputFile.iteritems():
-      outputFile.write('%s\t%d\n' % (todayDateString, infectedCounts[countyID]))
+      outputFile.write('%s\t%d\n' % (todayDateString, infectedCounts[countyID]*self.scalingFactor))
 
   def infectCrossCounty(self):
     infectedCounts = self.getInfectedCounts()
