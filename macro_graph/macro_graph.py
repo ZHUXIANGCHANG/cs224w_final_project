@@ -1,5 +1,5 @@
 import csv
-from datetime import date
+from datetime import date, datetime
 import json
 import os
 import random
@@ -51,7 +51,8 @@ class MacroGraph:
 
   def simulate(self):
     print "TODO: Implement macro-graph level simulation"
-    # TODO: Open an output data file for each county
+    # Open an output data file for each county
+    countyIDToOutputFile = self.initializeOutputFiles()
 
     # Infect initial random county
     startCountyID, startCountyG = random.sample(self.countyGraphs.items(), 1)[0]
@@ -69,7 +70,39 @@ class MacroGraph:
       # Attempt to infect neighbors
       self.infectCrossCounty()
 
-    # TODO: Close all the output data files
+    # Close all the output data files
+    for countyID, outputFile in countyIDToOutputFile.iteritems():
+      outputFile.close()
+
+  def initializeOutputFiles(self):
+    # Create output directory
+    outputDir = self.generateOutputDirName()
+    cwd = os.getcwd()
+    os.makedirs(outputDir)
+    os.chdir(outputDir)
+    self.outputDir = outputDir
+
+    # Dump simulation info to a README
+    readmeF = open('README.txt', 'w')
+    readmeF.write(str(self))
+    readmeF.close()
+
+    # Open an output data file for each country
+    outputFiles = {}
+    for countyID, county in self.labels.iteritems():
+      f = open('%s.tab' % cleanse(county), 'w')
+      f.write('%s\n' % commentify(self.title))
+      f.write('%s\n' % commentify(county))
+      outputFiles[countyID] = f
+
+    # Return to original working directory
+    os.chdir(cwd)
+
+    return outputFiles
+
+  def generateOutputDirName(self):
+    timestamp = [datetime.now().strftime('%Y-%m-%d_%H-%M-%S')]
+    return '_'.join(self.title.split() + timestamp)
 
   def getInfectedCounts(self):
     return {countyID : countyGraph.getNumInfected() for countyID, countyGraph in self.countyGraphs.iteritems()}
@@ -102,6 +135,12 @@ class MacroGraph:
     for n in inputFile:
       labels[int(n[0])] = n[1]
     return labels
+
+def commentify(s, commentString='#'):
+  return (commentString + s).strip().replace('\n', '\n%s' % commentString)
+
+def cleanse(s):
+  return s.replace(' ', '_')
 
 """
 Basic graph validation below.
