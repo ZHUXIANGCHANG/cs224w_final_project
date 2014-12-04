@@ -2,6 +2,7 @@ import csv
 from datetime import date
 import json
 import os
+import random
 import snap
 import sys
 
@@ -50,6 +51,40 @@ class MacroGraph:
 
   def simulate(self):
     print "TODO: Implement macro-graph level simulation"
+    # TODO: Open an output data file for each county
+
+    # Infect initial random county
+    startCountyID, startCountyG = random.sample(self.countyGraphs.items(), 1)[0]
+    startCountyG.infect()
+
+    for day in xrange(self.duration):
+      # Get number infected from each county
+      infectedCounts = self.getInfectedCounts()
+      # TODO: Flush this count data for this day to the .tab files
+
+      # Advance a day
+      for countyID, countyGraph in self.countyGraphs.iteritems():
+        countyGraph.advanceDay()
+
+      # Attempt to infect neighbors
+      self.infectCrossCounty()
+
+    # TODO: Close all the output data files
+
+  def getInfectedCounts(self):
+    return {countyID : countyGraph.getNumInfected() for countyID, countyGraph in self.countyGraphs.iteritems()}
+
+  def infectCrossCounty(self):
+    infectedCounts = self.getInfectedCounts()
+    for countyNode in self.G.Nodes():
+      for neighborID in countyNode.GetOutEdges():
+        if MacroGraph.infectionSpreads(infectedCounts[countyNode.GetId()]):
+          self.countyGraphs[neighborID].infect()
+
+  @staticmethod
+  def infectionSpreads(numInfected):
+    # TODO: Make this probabilistic
+    return True
 
   def __str__(self):
     return json.dumps(self.simulationInfo, sort_keys=True, indent=4, separators=(',',' : '))
