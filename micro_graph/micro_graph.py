@@ -37,8 +37,8 @@ class MicroGraph:
 
     # initialize variables for SIR model
     # inital beta, delta values from https://grantbrown.github.io/Ebola-2014-Analysis-Archive/Oct_02_2014/Ebola2014/Ebola2014.html
-    self.beta = 0.259 / 2
-    self.delta = 0.08
+    self.beta = 0.259 / 10
+    self.delta = 0.63
     self.state = dict.fromkeys(xrange(numNodes), SUSCEPTIBLE) # dict: int nodeID => string SUSCEPTIBLE or INFECTED or RECOVERED
     self.countyHasBeenInfected = False
 

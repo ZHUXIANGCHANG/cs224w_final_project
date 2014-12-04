@@ -37,7 +37,7 @@ class MacroGraph:
     that all nodes in the county are infected. This bounds from above
     the probability of nodes spreading across counties.
     """
-    self.q = 0.1
+    self.q = 2000
     self.scalingFactor = 10
 
     # Populate the macro graph structure
