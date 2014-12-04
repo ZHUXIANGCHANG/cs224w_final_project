@@ -1,3 +1,13 @@
 reference/plots/*.tab
 reference/plots/*.plt
-*.pyc
+
+# OS generated files
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
