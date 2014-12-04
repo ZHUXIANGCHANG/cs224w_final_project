@@ -1,14 +1,13 @@
 class MicroGraph:
-  """
-  TODO: DEFINE THE INTERFACE
-  TODO: Have each method raise an error in here - they must be implemented by subclasses
-  TODO: This class should never be instantiated
-  """
+  '''
+  Base class for all the county-level graph representations.
+  This class should never be instantiated.
+  '''
 
   NOT_IMPLEMENTED_MESSAGE = 'Each subclass must implement this!'
 
   '''
-  The infect node is called when an infection has spread from another county
+  The infect method is called when an infection has spread from another county
   to this county. This county must then infect a node according to the protocol.
   '''
   def infect(self):
