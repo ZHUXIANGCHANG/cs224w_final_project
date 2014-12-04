@@ -44,7 +44,7 @@ class MacroGraph:
       countyInfo = countyGraphTypes[county] # dict, e.g. {"population": 358190, "graphType": "Small World"}
       graphType = countyInfo['graphType'].strip().lower()
       numNodes = countyInfo['population'] / 1000 # TODO: see how algorithm scales to larger graph sizes
-      countyG = MicroGraph.MicroGraph(graphType, numNodes)
+      countyG = MicroGraph(graphType, numNodes)
       self.countyGraphs[nID] = countyG
 
   def simulate(self):
