@@ -1,5 +1,5 @@
 import csv
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import json
 import os
 import random
@@ -48,7 +48,6 @@ class MacroGraph:
       self.countyGraphs[nID] = countyG
 
   def simulate(self):
-    print "TODO: Implement macro-graph level simulation"
     # Open an output data file for each county
     countyIDToOutputFile = self.initializeOutputFiles()
 
@@ -59,7 +58,8 @@ class MacroGraph:
     for day in xrange(self.duration):
       # Get number infected from each county
       infectedCounts = self.getInfectedCounts()
-      # TODO: Flush this count data for this day to the .tab files
+      # Flush infected counts data for this day to the .tab files for each county
+      self.flushInfectedCounts(infectedCounts, day, countyIDToOutputFile)
 
       # Advance a day
       for countyID, countyGraph in self.countyGraphs.iteritems():
@@ -104,6 +104,12 @@ class MacroGraph:
 
   def getInfectedCounts(self):
     return {countyID : countyGraph.getNumInfected() for countyID, countyGraph in self.countyGraphs.iteritems()}
+
+  def flushInfectedCounts(self, infectedCounts, day, countyIDToOutputFile):
+    todayDate = self.startDate + timedelta(days=day)
+    todayDateString = todayDate.strftime('%Y-%m-%d')
+    for countyID, outputFile in countyIDToOutputFile.iteritems():
+      outputFile.write('%s\t%d\n' % (todayDateString, infectedCounts[countyID]))
 
   def infectCrossCounty(self):
     infectedCounts = self.getInfectedCounts()
