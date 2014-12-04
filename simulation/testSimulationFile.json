@@ -4,44 +4,140 @@
       "Title" : "Example simulation info",
       "Country" : "Sierra Leone",
       "Counties" : {
-        "Kailahun" : "Random",
-        "Kenema" : "Random",
-        "Kono" : "Small World",
-        "Kambia" : "Small World",
-        "Koinadugu" : "Random",
-        "Bombali" : "Small World",
-        "Tonkolili" : "Random",
-        "Port Loko" : "Small World",
-        "Pujehun" : "Random",
-        "Bo" : "Small World",
-        "Moyamba" : "Random",
-        "Bonthe" : "Random"
+        "Kailahun" : {
+          "population": 358190,
+          "graphType": "Small World"
+        },
+        "Kenema" : {
+          "population": 497948,
+          "graphType": "Random"
+        },
+        "Kono" : {
+          "population": 335401,
+          "graphType": "Random"
+        },
+        "Kambia" : {
+          "population": 270462,
+          "graphType": "Small World"
+        },
+        "Koinadugu" : {
+          "population": 265758,
+          "graphType": "Small World"
+        },
+        "Bombali" : {
+          "population": 408390,
+          "graphType": "Random"
+        },
+        "Tonkolili" : {
+          "population": 347197,
+          "graphType": "Random"
+        },
+        "Port Loko" : {
+          "population": 453746,
+          "graphType": "Random"
+        },
+        "Pujehun" : {
+          "population": 228392,
+          "graphType": "Small World"
+        },
+        "Bo" : {
+          "population": 463668,
+          "graphType": "Random"
+        },
+        "Moyamba" : {
+          "population": 260910,
+          "graphType": "Small World"
+        },
+        "Bonthe" : {
+          "population": 129947,
+          "graphType": "Small World"
+        }
       }
     },
     {
       "Title" : "Second example simulation",
       "Country" : "Guinea",
       "Counties" : {
-        "Conakry" : "Random",
-        "Gueckedou" : "Random",
-        "Macenta" : "Small World",
-        "Dabola" : "Random",
-        "Kissidougou" : "Random",
-        "Telimele" : "Small World",
-        "Boffa" : "Random",
-        "Kouroussa" : "Small World",
-        "Siguiri" : "Random",
-        "Pita" : "Random",
-        "Nzerekore" : "Small World",
-        "Yomou" : "Random",
-        "Dubreka" : "Small World",
-        "Forecariah" : "Random",
-        "Kerouane" : "Random",
-        "Coyah" : "Small World",
-        "Dalaba" : "Random",
-        "Beyla" : "Small World",
-        "Kindia" : "Small World",
-        "Lola" : "Random"
+        "Conakry" : {
+          "population": 1667864,
+          "graphType": "Small World"
+        },
+        "Gueckedou" : {
+          "population": 291823,
+          "graphType": "Small World"
+        },
+        "Macenta" : {
+          "population": 298282,
+          "graphType": "Small World"
+        },
+        "Dabola" : {
+          "population": 182951,
+          "graphType": "Small World"
+        },
+        "Kissidougou" : {
+          "population": 283609,
+          "graphType": "Small World"
+        },
+        "Telimele" : {
+          "population": 283639,
+          "graphType": "Small World"
+        },
+        "Boffa" : {
+          "population": 211063,
+          "graphType": "Small World"
+        },
+        "Kouroussa" : {
+          "population": 268224,
+          "graphType": "Small World"
+        },
+        "Siguiri" : {
+          "population": 695449,
+          "graphType": "Random"
+        },
+        "Pita" : {
+          "population": 277059,
+          "graphType": "Small World"
+        },
+        "Nzerekore" : {
+          "population": 396118,
+          "graphType": "Random"
+        },
+        "Yomou" : {
+          "population": 176664,
+          "graphType": "Small World"
+        },
+        "Dubreka" : {
+          "population": 328418,
+          "graphType": "Random"
+        },
+        "Forecariah" : {
+          "population": 244649,
+          "graphType": "Small World"
+        },
+        "Kerouane" : {
+          "population": 211017,
+          "graphType": "Small World"
+        },
+        "Coyah" : {
+          "population": 264164,
+          "graphType": "Small World"
+        },
+        "Dalaba" : {
+          "population": 136320,
+          "graphType": "Small World"
+        },
+        "Beyla" : {
+          "population": 325482,
+          "graphType": "Random"
+        },
+        "Kindia" : {
+          "population": 438315,
+          "graphType": "Random"
+        },
+        "Lola" : {
+          "population": 175213,
+          "graphType": "Small World"
+        }
       }
     }
   ]
