@@ -83,6 +83,12 @@ class MicroGraph:
           self.state[currID] == RECOVERED
 
   '''
+    Returns the number of nodes in the graph.
+  '''
+  def getNumNodes(self):
+    return self.numNodes
+
+  '''
   Returns <String>'random' or 'small world'
   '''
   def getType(self):
