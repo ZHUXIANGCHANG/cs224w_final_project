@@ -20,9 +20,11 @@ class MicroGraph:
     self.numNodes = numNodes
 
     # initialize snap.py graph: self.G
-    nodeDeg = math.sqrt(numNodes)
+    nodeDeg = int( math.sqrt(numNodes) )
     if graphType == 'random':
-      self.G = snap.GenRndDegK(numNodes, nodeDeg)
+      numEdges = numNodes * nodeDeg / 2
+      self.G = snap.GenRndGnm(snap.PUNGraph, numNodes, numEdges)
+      #self.G = snap.GenRndDegK(numNodes, nodeDeg)
     elif graphType == 'small world':
       rewireProb = 0.01 # probability that an edge will be rewired in Watts-Strogatz model
       self.G = snap.GenSmallWorld(numNodes, nodeDeg/2, rewireProb)
