@@ -1,20 +1,47 @@
 {"Simulations" :
   [
     {
-      "Title" : "Example simulation info - schema not fixed yet",
+      "Title" : "Example simulation info",
       "Country" : "Sierra Leone",
       "Counties" : {
-        "FirstCounty" : "Random Graph Flag",
-        "SecondCounty" : "Small World Flag",
-        "Kenema" : "MicroGraph"
+        "Kailahun" : "Random",
+        "Kenema" : "Random",
+        "Kono" : "Small World",
+        "Kambia" : "Small World",
+        "Koinadugu" : "Random",
+        "Bombali" : "Small World",
+        "Tonkolili" : "Random",
+        "Port Loko" : "Small World",
+        "Pujehun" : "Random",
+        "Bo" : "Small World",
+        "Moyamba" : "Random",
+        "Bonthe" : "Random"
       }
     },
     {
-      "Title" : "Second simulation",
+      "Title" : "Second example simulation",
       "Country" : "Guinea",
       "Counties" : {
-        "A" : "blah",
-        "B" : "another"
+        "Conakry" : "Random",
+        "Gueckedou" : "Random",
+        "Macenta" : "Small World",
+        "Dabola" : "Random",
+        "Kissidougou" : "Random",
+        "Telimele" : "Small World",
+        "Boffa" : "Random",
+        "Kouroussa" : "Small World",
+        "Siguiri" : "Random",
+        "Pita" : "Random",
+        "Nzerekore" : "Small World",
+        "Yomou" : "Random",
+        "Dubreka" : "Small World",
+        "Forecariah" : "Random",
+        "Kerouane" : "Random",
+        "Coyah" : "Small World",
+        "Dalaba" : "Random",
+        "Beyla" : "Small World",
+        "Kindia" : "Small World",
+        "Lola" : "Random"
       }
     }
   ]

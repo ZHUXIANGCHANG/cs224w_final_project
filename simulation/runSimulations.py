@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import sys
+import random
 sys.path.insert(0, '../macro_graph')
 from macro_graph import MacroGraph
 
@@ -27,7 +28,8 @@ def main():
   simulations = parseSimulationFile(parseArgs())
   for simulation in simulations:
     G = MacroGraph(simulation)
-    print G
+    random.seed(0)
+    G.simulate()
 
 if __name__ == '__main__':
   main()
