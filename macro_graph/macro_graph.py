@@ -1,3 +1,4 @@
+from __future__ import division
 import csv
 from datetime import date, datetime, timedelta
 import json
@@ -31,6 +32,12 @@ class MacroGraph:
     self.countryPrefix = COUNTRY_NAME_TO_PREFIX[simulationInfo["Country"].strip().lower()]
     self.startDate, self.endDate = PREFIX_TO_SIMULATION_INTERVAL[self.countryPrefix]
     self.duration = (self.endDate-self.startDate).days
+    """
+    q is the probability of a county infecting its neighbors given 
+    that all nodes in the county are infected. This bounds from above
+    the probability of nodes spreading across counties.
+    """
+    self.q = 0.1
 
     # Populate the macro graph structure
     cwd = os.getcwd()
@@ -40,14 +47,19 @@ class MacroGraph:
     # Generate the county graphs
     countyGraphTypes = simulationInfo['Counties']
     self.countyGraphs = {}
+    self.totalNumNodes = 0
     for nID, county in self.labels.iteritems():
       countyInfo = countyGraphTypes[county] # dict, e.g. {"population": 358190, "graphType": "Small World"}
       graphType = countyInfo['graphType'].strip().lower()
-      numNodes = countyInfo['population'] / 1000 # TODO: see how algorithm scales to larger graph sizes
+      numNodes = countyInfo['population'] // 1000 # TODO: see how algorithm scales to larger graph sizes
       countyG = MicroGraph(graphType, numNodes)
+      self.totalNumNodes += numNodes
       self.countyGraphs[nID] = countyG
 
   def simulate(self):
+    # Initialize counters
+    self.crossCountyInfections = self.crossCountyAttempts = 0
+
     # Open an output data file for each county
     countyIDToOutputFile = self.initializeOutputFiles()
 
@@ -71,6 +83,8 @@ class MacroGraph:
     # Close all the output data files
     for countyID, outputFile in countyIDToOutputFile.iteritems():
       outputFile.close()
+
+    print '%s: %d cross-county infections on %d attempts (probability: %f)' % (self.title, self.crossCountyInfections, self.crossCountyAttempts, self.crossCountyInfections/self.crossCountyAttempts)
 
   def initializeOutputFiles(self):
     # Create output directory
@@ -115,13 +129,15 @@ class MacroGraph:
     infectedCounts = self.getInfectedCounts()
     for countyNode in self.G.Nodes():
       for neighborID in countyNode.GetOutEdges():
-        if MacroGraph.infectionSpreads(infectedCounts[countyNode.GetId()]):
+        countyID = countyNode.GetId()
+        if self.infectionSpreads(countyID, infectedCounts[countyID]):
+          self.crossCountyInfections += 1
           self.countyGraphs[neighborID].infect()
+        self.crossCountyAttempts += 1
 
-  @staticmethod
-  def infectionSpreads(numInfected):
-    # TODO: Make this probabilistic
-    return True
+  def infectionSpreads(self, countyID, numInfected):
+    probSpreading = self.q*(numInfected/(self.countyGraphs[countyID].getNumNodes()))
+    return random.random() < probSpreading
 
   def __str__(self):
     return json.dumps(self.simulationInfo, sort_keys=True, indent=4, separators=(',',' : '))
