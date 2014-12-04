@@ -13,10 +13,6 @@ Every time a new type of micro graph is created, be sure to add the necessary
 import statement and update the GRAPH_TYPE_TO_CLASS dictionary accordingly.
 '''
 from micro_graph import MicroGraph
-from random_graph import RandomGraph
-from small_world_graph import SmallWorldGraph
-# Maps a string identifier to the corresponding graph class
-GRAPH_TYPE_TO_CLASS = {'random':'RandomGraph', 'small world':'SmallWorldGraph'}
 
 # Naming constants
 SIERRA_LEONE_PREFIX = 'sl'
@@ -46,7 +42,8 @@ class MacroGraph:
     self.countyGraphs = {}
     for nID, county in self.labels.iteritems():
       graphType = countyGraphTypes[county].strip().lower()
-      countyG = globals()[GRAPH_TYPE_TO_CLASS[graphType]]()
+      numNodes = 100 # TODO: read numNodes in a county from the JSON file
+      countyG = MicroGraph.MicroGraph(graphType, numNodes)
       self.countyGraphs[nID] = countyG
 
   def simulate(self):
