@@ -71,8 +71,9 @@ class MicroGraph:
       return
 
     # TODO: randomly shuffle the order which we go through the nodes
-    randomOrdering = random.shuffle( range(self.numNodes) )
-    for currID in randomOrdering:
+    nodeIDs = range(self.numNodes)
+    random.shuffle( range(self.numNodes) )
+    for currID in nodeIDs:
       NI = self.G.GetNI(currID)
 
       if self.state[currID] == SUSCEPTIBLE:
