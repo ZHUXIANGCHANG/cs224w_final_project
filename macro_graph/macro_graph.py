@@ -3,16 +3,24 @@ import json
 import os
 import snap
 import sys
-sys.path.insert(0, '../micro_graph')
-from micro_graph import MicroGraph
 
+# Importing our micro graphs
+sys.path.insert(0, '../micro_graph')
+'''
+Every time a new type of micro graph is created, be sure to add the necessary
+import statement and update the GRAPH_TYPE_TO_CLASS dictionary accordingly.
+'''
+from micro_graph import MicroGraph
+from random_graph import RandomGraph
+from small_world_graph import SmallWorldGraph
+# Maps a string identifier to the corresponding graph class
+GRAPH_TYPE_TO_CLASS = {'random':'RandomGraph', 'small world':'SmallWorldGraph'}
+
+# Naming constants
 SIERRA_LEONE_PREFIX = 'sl'
 LIBERIA_PREFIX = 'lib'
 GUINEA_PREFIX = 'guin'
-
 COUNTRY_NAME_TO_PREFIX = {'sierra leone':SIERRA_LEONE_PREFIX, 'liberia':LIBERIA_PREFIX, 'guinea':GUINEA_PREFIX}
-# Maps a string identifier to the corresponding graph class
-GRAPH_TYPE_TO_CLASS = {'micrograph':'MicroGraph'}
 
 """
 Class definition for the macro graph.
@@ -27,7 +35,7 @@ class MacroGraph:
     os.chdir('../macro_graph')
     self.G, self.labels = MacroGraph.loadGraphAndLabels(self.countryPrefix)
     os.chdir(cwd)
-    # TODO: Generate the county graphs
+    # Generate the county graphs
     countyGraphTypes = simulationInfo['Counties']
     self.countyGraphs = {}
     for nID, county in self.labels.iteritems():
@@ -35,8 +43,11 @@ class MacroGraph:
       countyG = globals()[GRAPH_TYPE_TO_CLASS[graphType]]()
       self.countyGraphs[nID] = countyG
 
+  def simulate(self):
+    print "TODO: Implement macro-graph level simulation"
+
   def __str__(self):
-    return json.dumps(self.simulationInfo, indent=4, separators=(',',' : '))
+    return json.dumps(self.simulationInfo, sort_keys=True, indent=4, separators=(',',' : '))
 
   @staticmethod
   def loadGraphAndLabels(prefix):
