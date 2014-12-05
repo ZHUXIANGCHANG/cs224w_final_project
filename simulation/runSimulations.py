@@ -1,5 +1,6 @@
 import argparse
 import csv
+from datetime import datetime
 import json
 import os
 import sys
@@ -35,7 +36,7 @@ def computeRootMeanSquareError(simAllInfectedCounts, countryName):
   @param countryName, e.g. 'Liberia'
   @return root-mean-squared-error of this simulation
   '''
-  countryPrefix = COUNTRY_NAME_TO_PREFIX[str(countryName)]
+  countryPrefix = COUNTRY_NAME_TO_PREFIX[countryName]
   
   # Import the csv to create trueAllInfectedCounts
   trueAllInfectedCounts = {} # same type as simAllInfectedCounts
@@ -72,12 +73,28 @@ def buildErrorVector(simAllInfectedCounts, trueAllInfectedCounts):
 def main():
   simulations = parseSimulationFile(parseArgs())
   #random.seed(0)
+
+  # keep track of best value of parameters
+  bestSimResults = {countryName: ('', float('inf')) for countryName in COUNTRY_NAME_TO_PREFIX} # dict: 'Sierra Leone' => (simulation['title'], rmse)
+  
   for simulation in simulations:
     print 'Starting simulation: ', simulation['title']
+    countryName = str(simulation['countryName'])
     G = MacroGraph(simulation)
     allInfectedCounts = G.simulate()
-    rmse = computeRootMeanSquareError(allInfectedCounts, simulation['countryName'])
+    
+    # calculate RMSE, and keep a record ONLY IF its the lowest error so far
+    rmse = computeRootMeanSquareError(allInfectedCounts, countryName)
     print 'Root-mean-squared-error was %.4f \n' % rmse
+    if rmse < bestSimResults[countryName][1]:
+      bestSimResults[countryName] = (simulation['title'], rmse)
+
+  # write ONLY the best values of the parameters to bestSimulationResults.txt 
+  with open('bestSimulationResults.txt', 'a') as outputfile: # append (keep all prior runs)
+    outputfile.write( '# Simulation run on ' + datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '\n' )
+    for countryName, bestSimResult in bestSimResults.iteritems():
+      outputfile.write(bestSimResult[0] + '\t' + str(bestSimResult[1]) + '\n')
+    outputfile.write('\n')
 
 if __name__ == '__main__':
   main()
