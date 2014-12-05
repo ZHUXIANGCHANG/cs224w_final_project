@@ -19,7 +19,7 @@ from micro_graph import MicroGraph
 SIERRA_LEONE_PREFIX = 'sl'
 LIBERIA_PREFIX = 'lib'
 GUINEA_PREFIX = 'guin'
-COUNTRY_NAME_TO_PREFIX = {'sierra leone':SIERRA_LEONE_PREFIX, 'liberia':LIBERIA_PREFIX, 'guinea':GUINEA_PREFIX}
+COUNTRY_NAME_TO_PREFIX = {'Sierra Leone':SIERRA_LEONE_PREFIX, 'Liberia':LIBERIA_PREFIX, 'Guinea':GUINEA_PREFIX}
 PREFIX_TO_SIMULATION_INTERVAL = {SIERRA_LEONE_PREFIX:(date(2014,8,12), date(2014,11,6)), LIBERIA_PREFIX:(date(2014,6,16), date(2014,11,2)), GUINEA_PREFIX:(date(2014,8,4), date(2014, 10, 01))}
 
 """
@@ -28,8 +28,8 @@ Class definition for the macro graph.
 class MacroGraph:
   def __init__(self, simulationInfo):
     self.simulationInfo = simulationInfo
-    self.title = simulationInfo['Title']
-    self.countryPrefix = COUNTRY_NAME_TO_PREFIX[simulationInfo["Country"].strip().lower()]
+    self.title = simulationInfo['title']
+    self.countryPrefix = COUNTRY_NAME_TO_PREFIX[ str(simulationInfo['countryName']) ]
     self.startDate, self.endDate = PREFIX_TO_SIMULATION_INTERVAL[self.countryPrefix]
     self.duration = (self.endDate-self.startDate).days
     """
@@ -37,8 +37,10 @@ class MacroGraph:
     that all nodes in the county are infected. This bounds from above
     the probability of nodes spreading across counties.
     """
-    self.q = 2000
-    self.scalingFactor = 10
+    self.q = simulationInfo['q']
+    
+    # number of nodes in graph = county's actual population / scalingFactor
+    self.scalingFactor = 10000
 
     # Populate the macro graph structure
     cwd = os.getcwd()
@@ -46,14 +48,12 @@ class MacroGraph:
     self.G, self.labels = MacroGraph.loadGraphAndLabels(self.countryPrefix)
     os.chdir(cwd)
     # Generate the county graphs
-    countyGraphTypes = simulationInfo['Counties']
+    countyGraphType = simulationInfo['countyGraphType']
     self.countyGraphs = {}
     self.totalNumNodes = 0
-    for nID, county in self.labels.iteritems():
-      countyInfo = countyGraphTypes[county] # dict, e.g. {"population": 358190, "graphType": "Small World"}
-      graphType = countyInfo['graphType'].strip().lower()
-      numNodes = countyInfo['population'] // self.scalingFactor # TODO: see how algorithm scales to larger graph sizes
-      countyG = MicroGraph(graphType, numNodes)
+    for nID, countyName in self.labels.iteritems():
+      numNodes = simulationInfo['countiesToPopulation'][countyName] // self.scalingFactor # TODO: see how algorithm scales to larger graph sizes
+      countyG = MicroGraph(countyGraphType, numNodes)
       self.totalNumNodes += numNodes
       self.countyGraphs[nID] = countyG
 
@@ -91,9 +91,11 @@ class MacroGraph:
     print '%s: %d cross-county infections on %d attempts (probability: %f)' % (self.title, self.crossCountyInfections, self.crossCountyAttempts, self.crossCountyInfections/self.crossCountyAttempts)
 
   def initializeOutputFiles(self):
-    # Create output directory
-    outputDir = self.generateOutputDirName()
     cwd = os.getcwd()
+
+    # Create output directory
+    os.chdir('results')
+    outputDir = self.generateOutputDirName()
     os.makedirs(outputDir)
     os.chdir(outputDir)
     self.outputDir = outputDir
@@ -121,7 +123,7 @@ class MacroGraph:
     return '_'.join(self.title.split() + timestamp)
 
   def getInfectedCounts(self):
-    return {countyID : countyGraph.getNumInfected() for countyID, countyGraph in self.countyGraphs.iteritems()}
+    return {countyID: countyGraph.getNumInfected() for (countyID, countyGraph) in self.countyGraphs.iteritems()}
 
   def flushInfectedCounts(self, infectedCounts, day, countyIDToOutputFile):
     todayDate = self.startDate + timedelta(days=day)

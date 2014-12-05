@@ -21,15 +21,17 @@ def isJson(f):
 
 def parseSimulationFile(simulationFile):
   with open(simulationFile, 'r') as f:
-    simulations = json.loads(f.read())["Simulations"]
+    simulations = json.loads( f.read() )
     return simulations
 
 def main():
   simulations = parseSimulationFile(parseArgs())
+  #random.seed(0)
   for simulation in simulations:
+    print 'Starting simulation: ', simulation['title']
     G = MacroGraph(simulation)
-    random.seed(0)
     G.simulate()
+    print ''
 
 if __name__ == '__main__':
   main()
