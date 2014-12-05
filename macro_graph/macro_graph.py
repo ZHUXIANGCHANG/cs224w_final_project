@@ -5,6 +5,7 @@ import json
 import os
 import random
 import snap
+import subprocess
 import sys
 
 # Importing our micro graphs
@@ -97,6 +98,7 @@ class MacroGraph:
     os.chdir('results')
     os.chdir(self.outputDir)
     subprocess.call(['gnuplot', '%s.plt' % self.title])
+    os.chdir(cwd)
 
     print '%s: %d cross-county infections on %d attempts (probability: %f)' % (self.title, self.crossCountyInfections, self.crossCountyAttempts, self.crossCountyInfections/self.crossCountyAttempts)
     return self.allInfectedCounts
