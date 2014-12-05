@@ -10,7 +10,7 @@ import json
 
 sl_countyToPopulation = {'Bo': 463668, 'Tonkolili': 347197, 'Kono': 335401, 'Koinadugu': 265758, 'Kenema': 497948, 'Pujehun': 228392, 'Kailahun': 358190, 'Moyamba': 260910, 'Bombali': 408390, 'Kambia': 270462, 'Bonthe': 129947, 'Port Loko': 453746}
 guin_countyToPopulation = {'Dalaba': 136320, 'Lola': 175213, 'Dabola': 182951, 'Kindia': 438315, 'Siguiri': 695449, 'Yomou': 176664, 'Telimele': 283639, 'Coyah': 264164, 'Gueckedou': 291823, 'Beyla': 325482, 'Nzerekore': 396118, 'Kerouane': 211017, 'Dubreka': 328418, 'Macenta': 298282, 'Boffa': 211063, 'Pita': 277059, 'Conakry': 1667864, 'Kouroussa': 268224, 'Forecariah': 244649, 'Kissidougou': 283609}
-lib_countyToPopulation = {'Bomi': 84119, 'Bong': 333481, 'Gbarpolu': 83388, 'Grand Bassa': 221693, 'Grand Cape Mount': 127076, 'Grand Gedeh': 125258, 'Grand Kru': 57913, 'Lofa': 276863, 'Margibi': 209923, 'Maryland': 135938, 'Montserrado': 1118241, 'Nimba': 462026, 'River Gee': 66789, 'Rivercess': 71509, 'Sinoe': 102391}
+lib_countyToPopulation = {'Bomi': 84119, 'Bong': 333481, 'Gbarpolu': 83388, 'Grand Bassa': 221693, 'Grand Cape Mount': 127076, 'Grand Gedeh': 125258, 'Grand Kru': 57913, 'Lofa': 276863, 'Margibi': 209923, 'Maryland': 135938, 'Montserrado': 1118241, 'Nimba': 462026, 'River Gee': 66789, 'RiverCess': 71509, 'Sinoe': 102391}
 
 ### Range of potential parameter values to try ###
 # q = scaling factor, to get macro-level probability of a county infecting its neighbors
