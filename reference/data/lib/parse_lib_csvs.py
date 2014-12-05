@@ -41,13 +41,20 @@ def parseCsvs(inPath, outFile):
   counties = list(counties)
   # Remove "County" suffix if there
   trimmedCounties = [trimCounty(c) for c in counties]
-  # We know have the data for each date: time to output a csv
+  # We now have the data for each date: time to output a csv
   writer.writerow(['date'] + trimmedCounties)
-  for date, countyData in datesToCountyData.iteritems():
+  prevCases = {}
+  for date in sorted(datesToCountyData.keys()):
+    countyData = datesToCountyData[date]
     row = [date]
+    currCases = {} # Mapping from county to cases
     for county in counties:
       cases = countyData[county] if county in countyData else 0
+      if county in prevCases and int(cases) < int(prevCases[county]):
+        cases = prevCases[county]
+      currCases[county] = cases
       row.append(cases)
+    prevCases = dict(prevCases.items() + currCases.items())
     # Omit rows with entirely 0s
     if (sum([int(num) for num in row[1:]]) == 0): continue
     writer.writerow(row)

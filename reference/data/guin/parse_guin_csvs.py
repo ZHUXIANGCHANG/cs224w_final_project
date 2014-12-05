@@ -42,11 +42,18 @@ def parseCsvs(inPath, outFile):
   counties = list(counties)
   # We know have the data for each date: time to output a csv
   writer.writerow(['date'] + counties)
-  for date, countyData in datesToCountyData.iteritems():
+  prevCases = {}
+  for date in sorted(datesToCountyData.keys()):
+    countyData = datesToCountyData[date]
     row = [date]
+    currCases = {} # Mapping from county to cases
     for county in counties:
       cases = countyData[county] if county in countyData else 0
+      if county in prevCases and int(cases) < int(prevCases[county]):
+        cases = prevCases[county]
+      currCases[county] = cases
       row.append(cases)
+    prevCases = dict(prevCases.items() + currCases.items())
     writer.writerow(row)
 
   # Restore
