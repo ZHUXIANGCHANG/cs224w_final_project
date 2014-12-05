@@ -3,6 +3,7 @@ import csv
 from datetime import datetime
 import json
 import os
+import random
 import sys
 import numpy as np
 sys.path.insert(0, '../macro_graph')
@@ -78,6 +79,7 @@ def main():
   bestSimResults = {countryName: ('', float('inf')) for countryName in COUNTRY_NAME_TO_PREFIX} # dict: 'Sierra Leone' => (simulation['title'], rmse)
   
   for simulation in simulations:
+    random.seed(0) # For reproducibility
     print 'Starting simulation: ', simulation['title']
     countryName = str(simulation['countryName'])
     G = MacroGraph(simulation)
