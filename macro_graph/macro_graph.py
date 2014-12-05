@@ -89,6 +89,8 @@ class MacroGraph:
       # Attempt to infect neighbors
       self.infectCrossCounty()
 
+    print ''
+    
     # Close all the output data files
     for countyID, outputFile in countyIDToOutputFile.iteritems():
       outputFile.close()
