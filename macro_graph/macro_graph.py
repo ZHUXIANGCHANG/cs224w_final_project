@@ -92,6 +92,12 @@ class MacroGraph:
     for countyID, outputFile in countyIDToOutputFile.iteritems():
       outputFile.close()
 
+    # Generate the .png plot file
+    cwd = os.getcwd()
+    os.chdir('results')
+    os.chdir(self.outputDir)
+    subprocess.call(['gnuplot', '%s.plt' % self.title])
+
     print '%s: %d cross-county infections on %d attempts (probability: %f)' % (self.title, self.crossCountyInfections, self.crossCountyAttempts, self.crossCountyInfections/self.crossCountyAttempts)
     return self.allInfectedCounts
 
