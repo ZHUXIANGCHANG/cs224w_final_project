@@ -115,6 +115,9 @@ class MacroGraph:
       f.write('%s\n' % commentify(county))
       outputFiles[countyID] = f
 
+    # Create a .plt file to plot the simulation results
+    self.genPltFile()
+
     # Return to original working directory
     os.chdir(cwd)
 
@@ -123,6 +126,23 @@ class MacroGraph:
   def generateOutputDirName(self):
     timestamp = [datetime.now().strftime('%Y-%m-%d_%H-%M-%S')]
     return '_'.join(self.title.split() + timestamp)
+
+  def genPltFile(self):
+    outFile = open('%s.plt' % self.title, 'w')
+
+    # Write boilerplate
+    outFile.write('set title "%s"\n' % self.title)
+    outFile.write('set key top left\n')
+    outFile.write('set grid\n')
+    outFile.write('set xdata time\n')
+    outFile.write('set timefmt "%Y-%m-%d"\n')
+    outFile.write('set terminal png size 1000,800\n')
+    outFile.write('set output "%s.png"\n' % self.title)
+
+    # Write plotting lines
+    plotLines = ['"%s" using 1:2 title "%s" with lines' % ('%s.tab' % cleanse(county), county) for countyID, county in self.labels.iteritems()]
+    outFile.write('plot %s\n' % ','.join(plotLines))
+    outFile.close()
 
   def getInfectedCounts(self):
     return {countyID: countyGraph.getNumInfected() for (countyID, countyGraph) in self.countyGraphs.iteritems()}
