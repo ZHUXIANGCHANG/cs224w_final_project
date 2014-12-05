@@ -40,7 +40,8 @@ class MacroGraph:
     self.q = simulationInfo['q']
     
     # number of nodes in graph = county's actual population / scalingFactor
-    self.scalingFactor = 10000
+    # note: this is also used by micro_graph to determine desired degree of nodes
+    self.scalingFactor = 10
 
     # Populate the macro graph structure
     cwd = os.getcwd()
@@ -48,12 +49,13 @@ class MacroGraph:
     self.G, self.labels = MacroGraph.loadGraphAndLabels(self.countryPrefix)
     os.chdir(cwd)
     # Generate the county graphs
+    beta, delta = simulationInfo['beta'], simulationInfo['delta']
     countyGraphType = simulationInfo['countyGraphType']
     self.countyGraphs = {}
     self.totalNumNodes = 0
     for nID, countyName in self.labels.iteritems():
       numNodes = simulationInfo['countiesToPopulation'][countyName] // self.scalingFactor # TODO: see how algorithm scales to larger graph sizes
-      countyG = MicroGraph(countyGraphType, numNodes)
+      countyG = MicroGraph(beta, delta, countyGraphType, numNodes, self.scalingFactor)
       self.totalNumNodes += numNodes
       self.countyGraphs[nID] = countyG
 

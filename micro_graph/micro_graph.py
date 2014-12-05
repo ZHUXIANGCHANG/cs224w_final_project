@@ -15,19 +15,19 @@ class MicroGraph:
     * SIR beta,delta parameters
   '''
 
-  def __init__(self, graphType='random', numNodes=100):
+  def __init__(self, beta, delta, graphType, numNodes, scalingFactor):
     self.graphType = graphType
     self.numNodes = numNodes
 
     # initialize snap.py graph: self.G
-    nodeDeg = int( math.log(numNodes) )
-    if graphType == 'random':
+    # for degree, use reproductive number 1.5 = degree * beta: on avg, ebola patient should infect 1.5 other people
+    nodeDeg = math.ceil((1.5 / beta) / scalingFactor)
+    if graphType == 'small world':
+      rewireProb = 0.01 # probability that an edge will be rewired in Watts-Strogatz model
+      self.G = snap.GenSmallWorld(numNodes, int(nodeDeg/2), rewireProb) # divide degree by 2 b/c graph is undirected
+    elif graphType == 'random':
       numEdges = numNodes * nodeDeg / 2
       self.G = snap.GenRndGnm(snap.PUNGraph, numNodes, numEdges)
-      #self.G = snap.GenRndDegK(numNodes, nodeDeg)
-    elif graphType == 'small world':
-      rewireProb = 0.01 # probability that an edge will be rewired in Watts-Strogatz model
-      self.G = snap.GenSmallWorld(numNodes, nodeDeg/2, rewireProb) # divide degree by 2 b/c graph is undirected
     elif graphType == 'complete':
       self.G = snap.GenFull(snap.PUNGraph, numNodes)
     elif graphType == 'scale free':
@@ -36,9 +36,7 @@ class MicroGraph:
       raise NotImplementedError("graphType argument must be in {'random', 'small world', 'complete', 'scale free}")
 
     # initialize variables for SIR model
-    # inital beta, delta values from https://grantbrown.github.io/Ebola-2014-Analysis-Archive/Oct_02_2014/Ebola2014/Ebola2014.html
-    self.beta = 0.259 / 10
-    self.delta = 0.63
+    self.beta, self.delta = beta, delta
     self.state = dict.fromkeys(xrange(numNodes), SUSCEPTIBLE) # dict: int nodeID => string SUSCEPTIBLE or INFECTED or RECOVERED
     self.countyHasBeenInfected = False
 
@@ -70,9 +68,8 @@ class MicroGraph:
       # minor optimization: do not need to run any SIR simulation (since we know everyone will remain SUSCEPTIBLE)
       return
 
-    # TODO: randomly shuffle the order which we go through the nodes
     nodeIDs = range(self.numNodes)
-    random.shuffle( range(self.numNodes) )
+    random.shuffle( range(self.numNodes) ) # randomly shuffle the order in which we go through the nodes
     for currID in nodeIDs:
       NI = self.G.GetNI(currID)
 
