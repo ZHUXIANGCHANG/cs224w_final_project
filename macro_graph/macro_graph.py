@@ -9,10 +9,6 @@ import sys
 
 # Importing our micro graphs
 sys.path.insert(0, '../micro_graph')
-'''
-Every time a new type of micro graph is created, be sure to add the necessary
-import statement and update the GRAPH_TYPE_TO_CLASS dictionary accordingly.
-'''
 from micro_graph import MicroGraph
 
 # Naming constants
@@ -60,8 +56,14 @@ class MacroGraph:
       self.countyGraphs[nID] = countyG
 
   def simulate(self):
+    '''
+    Run the simulation.
+    @return allInfectedCounts: dict from date => upscaled infectedCounts from that date
+           e.g. '2014-10-18': {'Gbarpolu': 80000, 'Grand Gedeh': 120000, ... }
+    '''
     # Initialize counters
     self.crossCountyInfections = self.crossCountyAttempts = 0
+    self.allInfectedCounts = {} # keeps track of all infectedCounts
 
     # Open an output data file for each county
     countyIDToOutputFile = self.initializeOutputFiles()
@@ -76,7 +78,7 @@ class MacroGraph:
       print "%d" % (day+1),
       # Get number infected from each county
       infectedCounts = self.getInfectedCounts()
-      # Flush infected counts data for this day to the .tab files for each county
+      # Flush infected counts data for this day to the .tab files for each county, and to allInfectedCounts
       self.flushInfectedCounts(infectedCounts, day, countyIDToOutputFile)
 
       # Advance a day
@@ -91,6 +93,7 @@ class MacroGraph:
       outputFile.close()
 
     print '%s: %d cross-county infections on %d attempts (probability: %f)' % (self.title, self.crossCountyInfections, self.crossCountyAttempts, self.crossCountyInfections/self.crossCountyAttempts)
+    return self.allInfectedCounts
 
   def initializeOutputFiles(self):
     cwd = os.getcwd()
@@ -128,10 +131,20 @@ class MacroGraph:
     return {countyID: countyGraph.getNumInfected() for (countyID, countyGraph) in self.countyGraphs.iteritems()}
 
   def flushInfectedCounts(self, infectedCounts, day, countyIDToOutputFile):
+    '''
+    0) Multiply all infectedCounts by self.scalingFactor
+    1) Flush infected counts data for this day to the .tab files for each county
+    2) Add infected counts to self.allInfectedCounts (for calculating mean-squared-error metric)
+    '''
+    # dict from county name => upscaled infected count, e.g. Lola=>207
+    upscaledInfectedCounts = {self.labels[countyID]: infectedCount*self.scalingFactor for countyID, infectedCount in infectedCounts.iteritems()}
+    
     todayDate = self.startDate + timedelta(days=day)
     todayDateString = todayDate.strftime('%Y-%m-%d')
     for countyID, outputFile in countyIDToOutputFile.iteritems():
       outputFile.write('%s\t%d\n' % (todayDateString, infectedCounts[countyID]*self.scalingFactor))
+
+    self.allInfectedCounts[todayDateString] = upscaledInfectedCounts
 
   def infectCrossCounty(self):
     infectedCounts = self.getInfectedCounts()
