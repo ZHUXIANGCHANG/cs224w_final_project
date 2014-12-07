@@ -47,7 +47,8 @@ def computeRootMeanSquareError(simAllInfectedCounts, countryName):
     reader = csv.DictReader(infile)
     for row in reader:
       date = row.pop('date')
-      trueAllInfectedCounts[ date ] = {county: int(trueCount) for county,trueCount in row.iteritems()}
+      # add under-reporting factor of 2.5: http://www.cdc.gov/mmwr/preview/mmwrhtml/su6303a1.htm#Appendix-tab4
+      trueAllInfectedCounts[ date ] = {county: int(trueCount)*2.5 for county,trueCount in row.iteritems()}
   os.chdir(cwd)
 
   # Create a difference vector to calculate root-mean-squared-error
@@ -92,7 +93,7 @@ def main():
       bestSimResults[countryName] = (simulation['title'], rmse)
 
   # write ONLY the best values of the parameters to bestSimulationResults.txt 
-  with open('bestSimulationResults.txt', 'a') as outputfile: # append (keep all prior runs)
+  with open('bestSimulationResults2.txt', 'a') as outputfile: # append (keep all prior runs)
     outputfile.write( '# Simulation run on ' + datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '\n' )
     for countryName, bestSimResult in bestSimResults.iteritems():
       outputfile.write(bestSimResult[0] + '\t' + str(bestSimResult[1]) + '\n')

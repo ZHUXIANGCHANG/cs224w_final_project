@@ -46,13 +46,14 @@ class MacroGraph:
     self.G, self.labels = MacroGraph.loadGraphAndLabels(self.countryPrefix)
     os.chdir(cwd)
     # Generate the county graphs
+    rewireProb = simulationInfo['rewireProb']
     beta, delta = simulationInfo['beta'], simulationInfo['delta']
     countyGraphType = simulationInfo['countyGraphType']
     self.countyGraphs = {}
     self.totalNumNodes = 0
     for nID, countyName in self.labels.iteritems():
       numNodes = simulationInfo['countiesToPopulation'][countyName] // self.scalingFactor # TODO: see how algorithm scales to larger graph sizes
-      countyG = MicroGraph(beta, delta, countyGraphType, numNodes, self.scalingFactor)
+      countyG = MicroGraph(beta, delta, countyGraphType, rewireProb, numNodes, self.scalingFactor)
       self.totalNumNodes += numNodes
       self.countyGraphs[nID] = countyG
 

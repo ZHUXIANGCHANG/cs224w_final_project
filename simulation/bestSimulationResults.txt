@@ -3,3 +3,8 @@ lib_q=2000,beta=0.0592,delta=0.60	272181.219141
 sl_q=2000,beta=0.0319,delta=0.80	301004.809591
 guin_q=2000,beta=0.0250,delta=0.20	260535.742098
 
+# Simulation run on 2014-12-06_17-40-21
+lib_q=20,beta=0.0200,delta=0.75,rewire=0.010	263739.982913
+sl_q=55,beta=0.0200,delta=0.75,rewire=0.010	301732.923896
+guin_q=150,beta=0.0200,delta=0.75,rewire=0.010	261092.288441
+

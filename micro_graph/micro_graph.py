@@ -15,16 +15,20 @@ class MicroGraph:
     * SIR beta,delta parameters
   '''
 
-  def __init__(self, beta, delta, graphType, numNodes, scalingFactor):
+  def __init__(self, beta, delta, graphType, rewireProbInput, numNodes, scalingFactor):
     self.graphType = graphType
     self.numNodes = numNodes
 
     # initialize snap.py graph: self.G
+    
     # for degree, use reproductive number 1.5 = degree * beta: on avg, ebola patient should infect 1.5 other people
-    nodeDeg = math.ceil((1.5 / beta) / scalingFactor)
+    # nodeDeg = math.ceil((1.5 / beta) / scalingFactor)
+    
+    nodeDeg = math.ceil( 10.0 / scalingFactor) # most real world graphs have node degree 2~15
+    
     if graphType == 'small world':
-      rewireProb = 0.01 # probability that an edge will be rewired in Watts-Strogatz model
-      self.G = snap.GenSmallWorld(numNodes, int(nodeDeg/2), rewireProb) # divide degree by 2 b/c graph is undirected
+      rewireProb = rewireProbInput # probability that an edge will be rewired in Watts-Strogatz model
+      self.G = snap.GenSmallWorld(numNodes, int(nodeDeg/2), rewireProb) # for snap function, must divide degree by 2
     elif graphType == 'random':
       numEdges = numNodes * nodeDeg / 2
       self.G = snap.GenRndGnm(snap.PUNGraph, numNodes, numEdges)
