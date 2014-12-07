@@ -19,9 +19,9 @@ rewire_vals = [0.01, 0.003, 0.001] # 10/1000, 3/1000, 1/1000
 # q = scaling factor, to get macro-level probability of a county infecting its neighbors
 # Guinea: 200 real infections / 200K people = 1/1000, x q = probability of infecting neighbor
 # but in our simulation, usually 2K infections / 200K people = 1/100 * q
-sl_q_vals = [20, 55, 150, 400] # roughly powers of e
-guin_q_vals = [20, 55, 150, 400]
-lib_q_vals = [20, 55, 150, 400]
+sl_q_vals = [55, 150, 400] # roughly powers of e
+guin_q_vals = [55, 150, 400]
+lib_q_vals = [55, 150, 400]
 
 # beta = micro-level probability of a person moving from SUSCEPTIBLE to INFECTED
 # daily risk for onward transmission ranges from 0.02-0.3: http://www.cdc.gov/mmwr/preview/mmwrhtml/su6303a1.htm#Appendix-tab1
@@ -32,9 +32,9 @@ lib_beta_vals = [0.02, 0.04, 0.05925] # Rivers = 0.05925
 # delta = micro-level probability of a person moving from INFECTED to RECOVERED
 # much less sure about how to ballpark this parameter.
 # Note: case fatality rate is around 0.74 guin, 0.48 sl, 0.71 lib (http://currents.plos.org/outbreaks/article/estimating-the-reproduction-number-of-zaire-ebolavirus-ebov-during-the-2014-outbreak-in-west-africa/)
-sl_delta_vals = [0.75]
-guin_delta_vals = [0.75]
-lib_delta_vals = [0.75]
+sl_delta_vals = [0.7]
+guin_delta_vals = [0.7]
+lib_delta_vals = [0.7]
 
 def main():
   simulations = []
