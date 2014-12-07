@@ -1,0 +1,25 @@
+# Simulation run on 2014-12-05_12-10-32
+lib_q=2000,beta=0.0592,delta=0.60	272181.219141
+sl_q=2000,beta=0.0319,delta=0.80	301004.809591
+guin_q=2000,beta=0.0250,delta=0.20	260535.742098
+
+# Simulation run on 2014-12-05_23-06-35
+	inf
+SINGLE_sl_q=2000,beta=0.0319,delta=0.60	8247.53629781
+	inf
+
+# Simulation run on 2014-12-05_23-14-32
+	inf
+SINGLE_sl_q=2000,beta=0.0319,delta=0.60	8247.53629781
+	inf
+
+# Simulation run on 2014-12-05_23-20-29
+	inf
+SINGLE_sl_q=2000,beta=0.0319,delta=0.60	8247.53629781
+	inf
+
+# Simulation run on 2014-12-06_04-24-52
+lib_q=2000,beta=0.0592,delta=0.80	12697.2644206
+sl_q=2000,beta=0.0319,delta=0.70	8196.02765711
+guin_q=2000,beta=0.0300,delta=0.60	2142.18654455
+

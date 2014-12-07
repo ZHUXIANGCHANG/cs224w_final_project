@@ -1,0 +1,96 @@
+Starting simulation:  sl_q=2000,beta=0.0319,delta=0.60
+This simulation will run for 86 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 
+sl_q=2000,beta=0.0319,delta=0.60: 2930 cross-county infections on 3440 attempts (probability: 0.851744)
+Root-mean-squared-error was 8247.5363 
+
+Starting simulation:  sl_q=2000,beta=0.0319,delta=0.70
+This simulation will run for 86 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 
+sl_q=2000,beta=0.0319,delta=0.70: 2930 cross-county infections on 3440 attempts (probability: 0.851744)
+Root-mean-squared-error was 8196.0277 
+
+Starting simulation:  sl_q=2000,beta=0.0319,delta=0.80
+This simulation will run for 86 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 
+sl_q=2000,beta=0.0319,delta=0.80: 2935 cross-county infections on 3440 attempts (probability: 0.853198)
+Root-mean-squared-error was 8366.4170 
+
+Starting simulation:  sl_q=2000,beta=0.0319,delta=0.90
+This simulation will run for 86 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 
+sl_q=2000,beta=0.0319,delta=0.90: 2930 cross-county infections on 3440 attempts (probability: 0.851744)
+Root-mean-squared-error was 8228.6417 
+
+Starting simulation:  guin_q=2000,beta=0.0250,delta=0.60
+This simulation will run for 58 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 
+guin_q=2000,beta=0.0250,delta=0.60: 3107 cross-county infections on 3944 attempts (probability: 0.787779)
+Root-mean-squared-error was 3015.5892 
+
+Starting simulation:  guin_q=2000,beta=0.0250,delta=0.70
+This simulation will run for 58 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 
+guin_q=2000,beta=0.0250,delta=0.70: 3093 cross-county infections on 3944 attempts (probability: 0.784229)
+Root-mean-squared-error was 3005.0973 
+
+Starting simulation:  guin_q=2000,beta=0.0250,delta=0.80
+This simulation will run for 58 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 
+guin_q=2000,beta=0.0250,delta=0.80: 3091 cross-county infections on 3944 attempts (probability: 0.783722)
+Root-mean-squared-error was 2978.9625 
+
+Starting simulation:  guin_q=2000,beta=0.0250,delta=0.90
+This simulation will run for 58 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 
+guin_q=2000,beta=0.0250,delta=0.90: 3120 cross-county infections on 3944 attempts (probability: 0.791075)
+Root-mean-squared-error was 2976.0932 
+
+Starting simulation:  guin_q=2000,beta=0.0300,delta=0.60
+This simulation will run for 58 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 
+guin_q=2000,beta=0.0300,delta=0.60: 3148 cross-county infections on 3944 attempts (probability: 0.798174)
+Root-mean-squared-error was 2142.1865 
+
+Starting simulation:  guin_q=2000,beta=0.0300,delta=0.70
+This simulation will run for 58 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 
+guin_q=2000,beta=0.0300,delta=0.70: 3156 cross-county infections on 3944 attempts (probability: 0.800203)
+Root-mean-squared-error was 2177.5957 
+
+Starting simulation:  guin_q=2000,beta=0.0300,delta=0.80
+This simulation will run for 58 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 
+guin_q=2000,beta=0.0300,delta=0.80: 3130 cross-county infections on 3944 attempts (probability: 0.793611)
+Root-mean-squared-error was 2172.9116 
+
+Starting simulation:  guin_q=2000,beta=0.0300,delta=0.90
+This simulation will run for 58 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 
+guin_q=2000,beta=0.0300,delta=0.90: 3156 cross-county infections on 3944 attempts (probability: 0.800203)
+Root-mean-squared-error was 2184.3048 
+
+Starting simulation:  lib_q=2000,beta=0.0592,delta=0.60
+This simulation will run for 139 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 
+lib_q=2000,beta=0.0592,delta=0.60: 4398 cross-county infections on 5004 attempts (probability: 0.878897)
+Root-mean-squared-error was 12739.7634 
+
+Starting simulation:  lib_q=2000,beta=0.0592,delta=0.70
+This simulation will run for 139 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 
+lib_q=2000,beta=0.0592,delta=0.70: 4398 cross-county infections on 5004 attempts (probability: 0.878897)
+Root-mean-squared-error was 12764.6251 
+
+Starting simulation:  lib_q=2000,beta=0.0592,delta=0.80
+This simulation will run for 139 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 
+lib_q=2000,beta=0.0592,delta=0.80: 4398 cross-county infections on 5004 attempts (probability: 0.878897)
+Root-mean-squared-error was 12697.2644 
+
+Starting simulation:  lib_q=2000,beta=0.0592,delta=0.90
+This simulation will run for 139 days
+Day Counter:  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 
+lib_q=2000,beta=0.0592,delta=0.90: 4447 cross-county infections on 5004 attempts (probability: 0.888689)
+Root-mean-squared-error was 12878.3440 
+
