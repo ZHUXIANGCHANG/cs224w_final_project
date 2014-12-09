@@ -1,0 +1,30 @@
+{
+    "beta" : 0.025,
+    "countiesToPopulation" : {
+        "Beyla" : 325482,
+        "Boffa" : 211063,
+        "Conakry" : 1667864,
+        "Coyah" : 264164,
+        "Dabola" : 182951,
+        "Dalaba" : 136320,
+        "Dubreka" : 328418,
+        "Forecariah" : 244649,
+        "Gueckedou" : 291823,
+        "Kerouane" : 211017,
+        "Kindia" : 438315,
+        "Kissidougou" : 283609,
+        "Kouroussa" : 268224,
+        "Lola" : 175213,
+        "Macenta" : 298282,
+        "Nzerekore" : 396118,
+        "Pita" : 277059,
+        "Siguiri" : 695449,
+        "Telimele" : 283639,
+        "Yomou" : 176664
+    },
+    "countryName" : "Guinea",
+    "countyGraphType" : "small world",
+    "delta" : 0.9,
+    "q" : 2000,
+    "title" : "guin_q=2000,beta=0.0250,delta=0.90"
+}
